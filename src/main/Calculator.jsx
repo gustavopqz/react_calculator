@@ -28,8 +28,10 @@ export default class Calculator extends Component{
         this.setState({...initialState})
     }
 
-    setOperation(op){
-        console.log(op)
+    setOperation(operation){
+        if (this.state.current === 0){
+            this.setState({ operation, current: 1, clearDisplay: true})
+        }
     }
 
     addDigit(n){
@@ -47,7 +49,7 @@ export default class Calculator extends Component{
         if(n !== '.'){
             const i = this.state.current
             const newValue = parseFloat(displayValue)
-            const values = {...this.state.values}
+            const values = [...this.state.values]
             values[i] = newValue
             this.setState({values})
         }
